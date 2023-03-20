@@ -1,51 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltressen <ltressen@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 15:06:31 by ltressen          #+#    #+#             */
-/*   Updated: 2023/03/20 15:40:34 by ltressen         ###   ########.fr       */
+/*   Created: 2023/03/20 12:13:19 by ltressen          #+#    #+#             */
+/*   Updated: 2023/03/20 12:19:56 by ltressen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
-
-void	ft_send(int pid, char c)
+int	ft_power(int x, int n)
 {
-	int	i;
+	int	res;
 
-	i = 7;
-	while (i >= 0)
+	res = 1;
+	while (n > 0)
 	{
-		if (c & (1 << i))
-		{
-			kill(pid, SIGUSR1);
-			//ft_printf("1");
-		}
-		else
-		{
-			kill(pid, SIGUSR2);
-			//ft_printf("0");
-		}
-		i--;
-	usleep(10);
+		res *= x;
+		n--;
 	}
-}
-
-int	main(int argc, char **argv)
-{
-	int	i;
-
-	i = 0;
-	if (argc == 3)
-	{
-		while (argv[2][i])
-		{
-			ft_send(ft_atoi(argv[1]), argv[2][i]);
-			i++;
-		}
-	}
-	return (0);
+	return (res);
 }

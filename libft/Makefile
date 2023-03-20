@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ltressen <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: ltressen <ltressen@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 14:48:10 by ltressen          #+#    #+#              #
-#    Updated: 2023/03/16 09:40:24 by ltressen         ###   ########.fr        #
+#    Updated: 2023/03/20 12:20:21 by ltressen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC = ft_isalpha.c \
       ft_putstr_hex.c \
       get_next_line_bonus.c \
       get_next_line_utils_bonus.c \
+      ft_power.c \
 
 SRC_B = ft_lstnew_bonus.c \
 	ft_lstsize_bonus.c \

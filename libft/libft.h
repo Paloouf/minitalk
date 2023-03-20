@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltressen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ltressen <ltressen@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:48:02 by ltressen          #+#    #+#             */
-/*   Updated: 2023/03/16 10:39:25 by ltressen         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:20:12 by ltressen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ char	*store_txt(int fd, char *buff);
 char	*get_linef(char *buff);
 char	*store_rest(char *buff);
 char	*ft_strcpy(char *buff, char *str, int i);
+int	ft_power(int x, int n);
 
 #endif
