@@ -6,11 +6,24 @@
 /*   By: ltressen <ltressen@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:06:31 by ltressen          #+#    #+#             */
-/*   Updated: 2023/03/21 09:17:08 by ltressen         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:25:33 by ltressen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+int	g_sig;
+
+void	ft_break(int signal)
+{
+	if (signal == SIGUSR1)
+		g_sig = 1;
+	else if (signal == SIGUSR2)
+	{
+		ft_printf("Message recu");
+		g_sig = 1;
+	}
+}
 
 void	ft_send(int pid, char c)
 {
@@ -24,7 +37,9 @@ void	ft_send(int pid, char c)
 		else
 			kill(pid, SIGUSR2);
 		i--;
-		usleep(10);
+		while (g_sig != 1)
+			signal(SIGUSR1, ft_break);
+		g_sig = 0;
 	}
 }
 
@@ -32,6 +47,7 @@ int	main(int argc, char **argv)
 {
 	int	i;
 
+	g_sig = 0;
 	i = 0;
 	if (argc == 3)
 	{
@@ -40,6 +56,11 @@ int	main(int argc, char **argv)
 			ft_send(ft_atoi(argv[1]), argv[2][i]);
 			i++;
 		}
+		ft_send(ft_atoi(argv[1]), '\0');
+		while (g_sig == 0)
+		{
+			signal(SIGUSR2, ft_break);
+		}	
 	}
 	return (0);
 }
