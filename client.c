@@ -6,7 +6,7 @@
 /*   By: ltressen <ltressen@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:06:31 by ltressen          #+#    #+#             */
-/*   Updated: 2023/03/20 15:40:34 by ltressen         ###   ########.fr       */
+/*   Updated: 2023/03/21 09:17:08 by ltressen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,15 @@ void	ft_send(int pid, char c)
 {
 	int	i;
 
-	i = 7;
+	i = 10;
 	while (i >= 0)
 	{
 		if (c & (1 << i))
-		{
 			kill(pid, SIGUSR1);
-			//ft_printf("1");
-		}
 		else
-		{
 			kill(pid, SIGUSR2);
-			//ft_printf("0");
-		}
 		i--;
-	usleep(10);
+		usleep(10);
 	}
 }
 
