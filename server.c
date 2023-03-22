@@ -6,13 +6,13 @@
 /*   By: ltressen <ltressen@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 08:55:56 by ltressen          #+#    #+#             */
-/*   Updated: 2023/03/22 10:09:37 by ltressen         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:13:05 by ltressen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	ft_msg(int res, int i, siginfo_t *lol)
+static void	ft_msg(int res, int i, siginfo_t *lol)
 {
 	if (res == 0 && i == 11)
 	{
@@ -21,7 +21,7 @@ void	ft_msg(int res, int i, siginfo_t *lol)
 	}
 }
 
-void	ft_write(int signal, siginfo_t *lol, void *nimp)
+static void	ft_write(int signal, siginfo_t *lol, void *nimp)
 {
 	static int	bits[11];
 	static int	i = 11;
@@ -53,7 +53,7 @@ int	main(void)
 	struct sigaction		siga;
 
 	siga.sa_sigaction = ft_write;
-	siga.sa_flags = SA_SIGINFO | SA_RESTART | SA_NODEFER;
+	siga.sa_flags = SA_SIGINFO;
 	sigemptyset(&siga.sa_mask);
 	ft_printf("%d\n", getpid());
 	while (1)
