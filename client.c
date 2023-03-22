@@ -6,13 +6,19 @@
 /*   By: ltressen <ltressen@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:06:31 by ltressen          #+#    #+#             */
-/*   Updated: 2023/03/21 15:25:33 by ltressen         ###   ########.fr       */
+/*   Updated: 2023/03/22 10:49:54 by ltressen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
 int	g_sig;
+
+void	ft_resend(int pid, int signal)
+{
+	if (kill(pid, signal) == -1)
+		ft_resend(pid, signal);
+}
 
 void	ft_break(int signal)
 {
@@ -33,12 +39,19 @@ void	ft_send(int pid, char c)
 	while (i >= 0)
 	{
 		if (c & (1 << i))
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				ft_resend(pid, SIGUSR1);
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				ft_resend(pid, SIGUSR2);
+		}
 		i--;
 		while (g_sig != 1)
 			signal(SIGUSR1, ft_break);
+		usleep(5);
 		g_sig = 0;
 	}
 }
